@@ -1,0 +1,117 @@
+Assignment Name: A 1
+L = { set of all strings over {0, 1, 2} which start with 0 and contains
+substring 102 }
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+char string[20],check[20];;
+int nfinal,nstate,lenstr,i,j;
+int fstate[5],tran[10][5];
+void accept()
+{
+printf("\nEnter the number of state =");
+scanf("%d",&nstate);
+printf("Enter the Input Symbols in string form = ");
+scanf("%s",string);
+printf("Enetr the Number of final states =");
+scanf("%d",&nfinal);
+printf("Enter those final states :=\n");
+for(i=0;i<nfinal;i++)
+scanf("%d",&fstate[i]);
+lenstr=strlen(string);
+printf("\nEnter the Transition states\n ");
+for(i=0;i<lenstr;i++)
+printf(" %c",string[i]);
+for(i=0;i<nstate;i++)
+{
+printf("\n%d ",i);
+for(j=0;j<lenstr;j++)
+scanf("%d",&tran[i][j]);
+}
+}
+void AcceptString(int c)
+{
+printf("\n\n%d)Enter the Validetion string =",c);
+scanf("%s",check);
+}
+
+Validation()
+{
+int stpt,temp=0;
+int lint,lcheck;
+
+lcheck=strlen(check); //length of checking string string
+stpt=0;
+for(i=0;i<lcheck;i++)
+{
+temp=1;
+ for(j=0;j<lenstr && temp;j++)
+ if(check[i]==string[j])  // checking the given alphabats in Input string or not
+ temp--;
+ j--;
+ if(temp==1)
+ {printf("\nInvalide Symbol that is %c not is in alphabet set.",check[i]);
+ return -1;
+ }
+ stpt=tran[stpt][j];
+}
+for(i=0;i<nfinal;i++)
+{if(stpt==fstate[i])
+return 1;
+}
+return -1;
+}
+void main()
+{ int k,n1,g;
+clrscr();
+accept();
+printf("\n How many String to Check ? ");
+scanf("%d",&n1);
+for(g=0;g<n1;g++)
+{
+AcceptString(g+1);
+k=Validation();
+if(k==-1)
+printf("-->it is Invalid String",check);
+else
+printf("-->it is Valid String",check);
+getch();
+}
+}
+
+out put:-
+
+Enter the number of state =6
+Enter the Input Symbols in string form = 012
+Enetr the Number of final states =1
+Enter those final states :=
+4
+
+Enter the Transition states
+   0 1 2
+0 1 5 5
+
+1 1 2 1
+
+2 3 2 1
+
+3 1 2 4
+
+4 4 4 4
+
+5 5 5 5
+
+ How many String to Check ? 5
+
+
+1)Enter the Validetion string =000102012
+-->it is Valid String
+2)Enter the Validetion string =0020102
+-->it is Valid String
+3)Enter the Validetion string =0100101020
+-->it is Valid String
+4)Enter the Validetion string =0212010211
+-->it is Valid String
+5)Enter the Validetion string =001112012
+-->it is Invalid String
+
